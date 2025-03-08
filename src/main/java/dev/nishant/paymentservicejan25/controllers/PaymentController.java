@@ -1,5 +1,6 @@
 package dev.nishant.paymentservicejan25.controllers;
 
+import com.stripe.exception.StripeException;
 import dev.nishant.paymentservicejan25.dtos.GeneratePaymentLinkRequestDTO;
 import dev.nishant.paymentservicejan25.services.PaymentService;
 import dev.nishant.paymentservicejan25.services.RazorPayGateway;
@@ -20,7 +21,7 @@ public class PaymentController {
     }
 
     @PostMapping("/payments")
-    public String generatePaymentLink(@RequestBody GeneratePaymentLinkRequestDTO generatePaymentLinkRequestDTO) {
+    public String generatePaymentLink(@RequestBody GeneratePaymentLinkRequestDTO generatePaymentLinkRequestDTO) throws StripeException {
 //        if(counter % 2 ==0) {
 //            counter++;
 //            return razorPayGateway.generatePaymentLink(generatePaymentLinkRequestDTO.getOrderId());
@@ -28,6 +29,6 @@ public class PaymentController {
 //            counter++;
 //            return stripeGateway.generatePaymentLink(generatePaymentLinkRequestDTO.getOrderId());
 //        }
-        return razorPayGateway.generatePaymentLink(generatePaymentLinkRequestDTO.getOrderId());
+        return stripeGateway.generatePaymentLink(generatePaymentLinkRequestDTO.getOrderId());
     }
 }
